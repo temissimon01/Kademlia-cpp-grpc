@@ -13,6 +13,8 @@
 
 int main(int argc, char* argv[]) {
 	
+	
+
 	std::vector<Server*> nodes;
 
 	std::string cmd;
@@ -26,7 +28,7 @@ int main(int argc, char* argv[]) {
 		if (cmd.compare("ADD") == 0) {
 			Server* instance = new Server(Identifier(nodes.size()));
 
-			instance->start("127.0.0.1", 8000 + nodes.size());
+			instance->start("127.0.0.1", 44973 + nodes.size());
 
 			nodes.push_back(instance);
 

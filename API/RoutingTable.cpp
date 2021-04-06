@@ -66,7 +66,7 @@ FindNodeAnswer RoutingTable::findClosest(const Identifier& destinationId)
 			}
 		}
 		//Check the next buckets
-		if (bucketId + i <= Kademlia::GUID_SPACE) {
+		if (bucketId + i < __buckets.size()) {
 			Bucket& next = __buckets[(int)(bucketId + i)];
 
 			for (const auto& id : next.getNodeIds()) {

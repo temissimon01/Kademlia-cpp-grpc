@@ -17,11 +17,13 @@ Identifier::numeric_type Bucket::size() const
 
 bool Bucket::contains(const Identifier& id) const
 {
-	std::vector<Identifier>::const_iterator ids_iterator = std::find_if(__nodeIds.begin(), __nodeIds.end(), [id](const Identifier& element)->bool {
-		return id == element;
-	});
+	for (int i = 0; i < __nodeIds.size(); i++) {
+		if (__nodeIds[i] == id) {
+			return true;
+		}
+	}
 
-	return ids_iterator != __nodeIds.end();
+	return false;
 }
 
 bool Bucket::contains(const ConnectionInfo& connection_info) const
@@ -74,6 +76,9 @@ void Bucket::pushToFront(const Identifier& id)
 
 ConnectionInfo Bucket::get(const Identifier& id)
 {
+	if (!contains(id)) {
+		throw std::runtime_error("E_UNKNOWN_ID");
+	}
 	return __nodesMap[id];
 }
 
