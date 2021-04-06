@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package kademlia_rpc;
+
+service Communication{
+	rpc ping(PingQuery) returns (PingReply);
+	rpc find_node(FindNodeQuery) returns (FindNodeReply);
+	rpc store(StoreQuery) returns (StoreReply);
+	rpc get(GetQuery) returns (GetReply);
+}
+
+message ConnectionInfo{
+	string id = 1;
+	string ip = 2;
+	uint32 port = 3;
+}
+
+message PingQuery{
+	uint64 magic = 1;
+	ConnectionInfo caller = 2;
+}
+
+message PingReply{
+	uint64 magic = 1;
+}
+
+message FindNodeQuery{
+	ConnectionInfo caller = 1;
+	string destination = 2;
+}
+
+message FindNodeReply{
+	repeated ConnectionInfo closest = 1;
+}
+
+message StoreQuery{
+	uint64 magic = 1;
+	ConnectionInfo caller = 2;
+	string key = 3;
+	bytes value = 4;
+}
+
+message StoreReply{
+	uint64 magic = 1;
+}
+
+message GetQuery{
+	uint64 magic = 1;
+	ConnectionInfo caller = 2;
+	string key = 3;
+}
+
+message GetReply{
+	uint64 magic = 1;
+	bytes value = 2;
+}
