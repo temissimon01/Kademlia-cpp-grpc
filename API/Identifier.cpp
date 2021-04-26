@@ -61,7 +61,7 @@ Identifier::operator std::string() const
 
 std::vector<Identifier> Identifier::GetDirectReferenceIds(const Identifier& id)
 {
-    std::vector<Identifier> ret(Kademlia::GUID_SPACE);
+    std::vector<Identifier> ret;
 
     for (unsigned int i = 0; i < Kademlia::GUID_SPACE; i++) {
         Identifier::numeric_type id_value = boost::multiprecision::pow((Identifier::numeric_type)2, i);
